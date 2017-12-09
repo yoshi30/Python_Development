@@ -25,3 +25,18 @@ timeline = json.loads(req.text)
 for tweet in timeline:
   print(tweet['text'])
   print(tweet['favorite_count'])
+
+# OAuth で GET
+twitter = OAuth1Session(CK, CS, AT, AS)
+req = twitter.get(url, params = params)
+
+if req.status_code == 200:
+    # レスポンスはJSON形式なので parse する
+    timeline = json.loads(req.text)
+    # 各ツイートの本文を表示
+    for tweet in timeline:
+        print(tweet["text"])
+
+else:
+    # エラーの場合
+    print ("Error: %d" % req.status_code)
